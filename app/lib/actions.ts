@@ -31,7 +31,7 @@ export async function createInvoice(formData: FormData) {
       VALUES (${customerId}, ${amountInCents}, ${status}, ${date})
     `;
   } catch (error) {
-    return { message: "Failed to create invoice" };
+    return { message: `Failed to create invoice: ${error}` };
   }
 
   revalidatePath("/dashboard/invoices");
@@ -54,7 +54,7 @@ export async function updateInvoice(id: string, formData: FormData) {
       WHERE id = ${id}
     `;
   } catch (error) {
-    return { message: "Failed to update invoice" };
+    return { message: `Failed to update invoice: ${error}` };
   }
 
   revalidatePath("/dashboard/invoices");
@@ -67,6 +67,6 @@ export async function deleteInvoice(id: string) {
     revalidatePath("/dashboard/invoices");
     return { message: "Invoice deleted" };
   } catch (error) {
-    return { message: "Failed to delete invoice" };
+    return { message: `Failed to delete invoice: ${error}` };
   }
 }
